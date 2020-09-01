@@ -1,0 +1,220 @@
+a:link {
+    color: black;
+}
+
+a:visited {
+    color: black;
+}
+
+a:hover {
+    color: orange;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.cn_table {
+    font-family: 'Lucida Sans Unicode', 'Lucida Grande', 'sans-serif';
+    font-size: 14px;
+    width: 400px;
+    margin: 5px;
+    border-collapse: collapse;
+    text-align: center;
+}
+.cn_table th{
+    font-size: 16px;
+    font-weight: normal;
+    color: #039;
+    padding: 10px 8px;
+    border-bottom: 2px solid #6678b1;
+}
+.cn_table td{
+    border-bottom: 1px solid #ccc;
+    color: #669;
+    padding: 6px 8px;
+}
+.cn_table tbody tr:hover td{
+    color: #009;
+}
+
+
+/* 首页header部分 */
+#header {
+    width: 100%;
+    height: 30px;
+    /*background-color: rgb(82,139,139);*/
+    position: absolute;
+    top: 0;
+}
+
+#header .header {
+    width: 1200px;
+    height: 30px;
+    margin: 0 auto;
+}
+
+#header .header_name {
+    height: 30px;
+    width: 200px;
+    float: right;
+    line-height: 30px;
+    text-align: right;
+    font-size: 20px;
+}
+
+#header .header_zx {
+    height: 30px;
+    width: 60px;
+    float: right;
+    line-height: 30px;
+    text-align: center;
+    font-size: 20px;
+}
+
+/* 首页header部分结束 */
+
+
+/* 首页content部分 */
+#content {
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#content .content {
+    width: 1200px;
+    margin: 15px auto;
+}
+
+#content .content .cn_box {
+    width: 1200px;
+    margin: 5px 0;
+    /*border-style: solid;
+    border-width: 1px;*/
+    float: left;
+}
+
+#content .content .cn_box hr {
+    width: 1200px;
+    margin: 10px 0;
+    border: 0;
+    height: 4px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+}
+
+#content .content .cn_box .cn_title {
+    width: 1200px;
+    padding: 0 5px;
+    margin: 20px 0 0 0;
+    text-align: left;
+    font-size: 30px;
+}
+
+#content .content .cn_box .cn_title span {
+    font-size: 15px;
+}
+
+#content .content .cn_box .cn_text {
+    width: 1200px;
+    height: 30px;
+    margin: 10px 0;
+    font-size: 17px;
+}
+
+#content .content .cn_box .cn_text div {
+    width: 200px;
+    height: 30px;
+    float: left;
+    line-height: 20px;
+    text-align: left;
+    padding-left: 5px;
+}
+
+#content .content .cn_box .cn_text div span {
+    color: orange;
+}
+
+#content .content .cn_box .cn_chart {
+    width: 1200px;
+    height: 400px;
+    margin: 2px 0;
+}
+
+
+
+#content .content .cn_box .cn_table_pie{
+    width: 1200px;
+    height: 400px;
+    margin: 2px 0;
+}
+#content .content .cn_box .cn_table_pie .cn_table_pie_table{
+    width: 400px;
+    height: 400px;
+    float: left;
+}
+#content .content .cn_box .cn_table_pie .cn_table_pie_pie{
+    width: 790px;
+    height: 370px;
+    float: left;
+    padding-top: 30px;
+}
+
+#content .content .cn_box .cn_table{
+    width: 100%;
+    margin: 2px 0 10px;
+}
+
+#content .content .cn_box .cn_zb{
+    width: 1200px;
+    height: 400px;
+    margin: 10px 0;
+    font-size: 17px;
+}
+#content .content .cn_box .cn_zb .cn_zb_options{
+    width: 190px;
+    height: 400px;
+    float: left;
+}
+#content .content .cn_box .cn_zb .cn_zb_options .zb_option{
+    width: 190px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    font-size: 13px;
+    border-radius: 2px;
+}
+#content .content .cn_box .cn_zb .cn_zb_options .zb_option:hover{
+    opacity: 0.5;
+}
+.start{
+    cursor: pointer;
+    background-color: rgba(204,204,204,1);
+}
+.end{
+    cursor: pointer;
+    color: #fff;
+    background-color: rgba(0,0,0,1);
+}
+#content .content .cn_box .cn_zb .cn_zb_chart{
+    width: 1000px;
+    height: 370px;
+    float: left;
+    padding-top: 30px;
+}
+
+
+/*footer*/
+#footer {
+    color: #000;
+    position: fixed;
+    bottom: 0;
+    margin: 20px auto 0;
+    width: 100%;
+    text-align: center;
+    index: 20;
+    background-color: #fff;
+    height: 20px;
+    line-height:20px;
+}

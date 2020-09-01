@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="/static/css/login.css">
+    <script src="/static/js/jquery.min.js"></script>
+</head>
+<body>
+
+    <img src="/static/images/bg_img.jpg" alt="" id="bg_img">
+
+    <div id="log_cnt">
+
+        <div id="log_form">
+            <h2>用户登录</h2>>
+
+            <form action="#" method="post" id="loginform">
+
+                <div class="user-box">
+                    <input type="text" name="account" id="account" onkeyup="HideMsg()">
+                    <label>用户名</label>
+                </div>
+                <div class="user-box">
+                    <input type="password" name="password" id="password" onkeyup="HideMsg()">
+                    <label>密码</label>
+                </div>
+                <div id="message"></div>
+                <a href="#" onclick="SubmitForm();">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    登录
+                </a>
+            </form>
+
+        </div>
+    </div>
+
+
+
+
+
+    <div id="log_footer">
+        &copy;2020 智能风控产品中心
+    </div>
+
+
+<script>
+    function fsubmit(obj) {
+        obj.submit();
+    }
+</script>
+
+<script>
+    function SubmitForm() {
+        $.ajax({
+            url:'/login',
+            type:'POST',
+            data:{'account':$('#account').val(),'password':$('#password').val()},
+            dataType:'json',
+            success:function(data){
+                if(data.status){
+                    location.href='/index';
+                }
+                else{
+                    document.getElementById('message').innerText=data.message;
+                }
+            }
+        })
+    }
+
+    function HideMsg() {
+        document.getElementById('message').innerText='';
+    }
+</script>
+
+</body>
+</html>

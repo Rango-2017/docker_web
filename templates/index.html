@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>数据监控</title>
+    <script src="/static/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/echarts.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+
+</head>
+<body>
+    <div id="header">
+        <div class="header">
+            <div class="header_zx"><a href="/logout">注销</a></div>
+            <div class="header_name">你好，{{ params.username }}</div>
+        </div>
+    </div>
+
+    <div id="content">
+        <div class="content">
+            <div class="cn_box">
+                <div class="cn_title">
+                    订单表 <span>({{ params.ddb_startdate }} ~ {{ params.ddb_enddate }})</span>
+                </div>
+                <hr />
+                <div class="cn_text">
+                    <div>表名：<span>{{ params.ddb_bm }}</span></div>
+                    <div>企业数：<span>{{ params.ddb_qys }}</span></div>
+                    <div>申请量：<span>{{ params.ddb_sql }}</span></div>
+                    <div>贷后量：<span>{{ params.ddb_dhl }}</span></div>
+                </div>
+                <div class="cn_text">{{ params.title1 }}</div>
+                <div class="cn_chart" id="chart1"></div>
+                <div class="cn_text">{{ params.title2 }}</div>
+                <div class="cn_table_pie">
+                    <div id="table1" class="cn_table_pie_table"></div>
+                    <div id="pie1" class="cn_table_pie_pie"></div>
+                </div>
+                <div class="cn_text">{{ params.title3 }}</div>
+                <div class="cn_table_pie">
+                    <div id="table2" class="cn_table_pie_table"></div>
+                    <div id="pie2" class="cn_table_pie_pie"></div>
+                </div>
+            </div>
+
+            <div class="cn_box">
+                <div class="cn_title">
+                    税务表 <span>({{ params.swb_startdate }} ~ {{ params.swb_enddate }})</span>
+                </div>
+                <hr />
+                <div class="cn_text">{{ params.title4 }}</div>
+                <div class="cn_table" id="table3"></div>
+                <div class="cn_chart" id="chart2"></div>
+            </div>
+
+            <div class="cn_box">
+                <div class="cn_title">
+                    指标表 <span></span>
+                </div>
+                <hr />
+                <div class="cn_text">{{ params.title5 }}</div>
+                <div class="cn_chart" id="zb_chart1"></div>
+
+                <div class="cn_text">{{ params.title6 }}</div>
+                <div class="cn_chart" id="zb_chart2"></div>
+
+                <div class="cn_text">{{ params.title7 }}</div>
+                <div class="cn_chart" id="zb_chart3"></div>
+
+                <div class="cn_text">{{ params.title8 }}</div>
+                <div class="cn_chart" id="zb_chart4"></div>
+
+                <div class="cn_text">{{ params.title9 }}</div>
+                <div class="cn_chart" id="zb_chart5"></div>
+
+                <div class="cn_text">{{ params.title10 }}</div>
+                <div class="cn_chart" id="zb_chart6"></div>
+
+                <div class="cn_text">{{ params.title11 }}</div>
+                <div class="cn_chart" id="zb_chart7"></div>
+
+                <div class="cn_text">{{ params.title12 }}</div>
+                <div class="cn_chart" id="zb_chart8"></div>
+
+                <div class="cn_text">{{ params.title13 }}</div>
+                <div class="cn_chart" id="zb_chart9"></div>
+
+                <div class="cn_text">{{ params.title14 }}</div>
+                <div class="cn_chart" id="zb_chart10"></div>
+
+                <div class="cn_text">{{ params.title15 }}</div>
+                <div class="cn_chart" id="zb_chart11"></div>
+
+                <div class="cn_text">{{ params.title16 }}</div>
+                <div class="cn_chart" id="zb_chart12"></div>
+
+                <div class="cn_text">{{ params.title17 }}</div>
+                <div class="cn_chart" id="zb_chart13"></div>
+
+                <div class="cn_text">{{ params.title18 }}</div>
+                <div class="cn_chart" id="zb_chart14"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer">&copy;2020 智能风控产品中心数据组</div>
+
+    <script>
+
+
+        $(
+            function () {
+                GetBarDdbF();
+                GetTableDdbF();
+                GetPieDdbF();
+                GetTableDdbS();
+                GetPieDdbS();
+                GetTableSwbF();
+                GetLineSwbF();
+                GetChartZzb1();
+                GetChartZzb2();
+                GetChartZzb3();
+                GetChartZzb4();
+                GetChartZzb5();
+                GetChartZzb6();
+                GetChartZzb7();
+                GetChartZzb8();
+                GetChartZzb9();
+                GetChartZzb10();
+                GetChartZzb11();
+                GetChartZzb12();
+                GetChartZzb13();
+                GetChartZzb14();
+                setInterval(GetBarDdbF, 1000*60*30);
+                setInterval(GetTableDdbF, 1000*60*30);
+                setInterval(GetPieDdbF, 1000*60*30);
+                setInterval(GetTableDdbS, 1000*60*30);
+                setInterval(GetPieDdbS, 1000*60*30);
+                setInterval(GetTableSwbF, 1000*60*30);
+                setInterval(GetLineSwbF, 1000*60*30);
+                setInterval(GetChartZzb1, 1000*60*30);
+                setInterval(GetChartZzb2, 1000*60*30);
+                setInterval(GetChartZzb3, 1000*60*30);
+                setInterval(GetChartZzb4, 1000*60*30);
+                setInterval(GetChartZzb5, 1000*60*30);
+                setInterval(GetChartZzb6, 1000*60*30);
+                setInterval(GetChartZzb7, 1000*60*30);
+                setInterval(GetChartZzb8, 1000*60*30);
+                setInterval(GetChartZzb9, 1000*60*30);
+                setInterval(GetChartZzb10, 1000*60*30);
+                setInterval(GetChartZzb11, 1000*60*30);
+                setInterval(GetChartZzb12, 1000*60*30);
+                setInterval(GetChartZzb13, 1000*60*30);
+                setInterval(GetChartZzb14, 1000*60*30);
+            }
+        );
+
+        function GetBarDdbF() {
+            var chart = echarts.init(document.getElementById('chart1'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "/get_bar1_ddb",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+
+        function GetTableDdbF() {
+            $.ajax({
+                url: "/get_table1_ddb",
+                dataType: 'json',
+                success: function (result) {
+                    var res='<table id="cn_table1" class="cn_table">'+
+                            '<thead><tr>'+
+                            '<th scope="col">source</th>'+
+                            '<th scope="col">bank</th>'+
+                            '<th scope="col">num</th>'+
+                            '</tr></thead><tbody>';
+                    $.each(result,function (i,obj) {
+                        res += '<tr><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td></tr>'
+                    });
+                    $('#table1').html(res);
+                }
+            })
+        }
+
+        function GetPieDdbF() {
+            var chart = echarts.init(document.getElementById('pie1'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "/get_pie1_ddb",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+
+        function GetTableDdbS() {
+            $.ajax({
+                url: "/get_table2_ddb",
+                dataType: 'json',
+                success: function (result) {
+                    var res='<table id="cn_table2" class="cn_table">'+
+                            '<thead><tr>'+
+                            '<th scope="col">source</th>'+
+                            '<th scope="col">bank</th>'+
+                            '<th scope="col">num</th>'+
+                            '</tr></thead><tbody>';
+                    $.each(result,function (i,obj) {
+                        res += '<tr><td>'+obj[0]+'</td><td>'+obj[1]+'</td><td>'+obj[2]+'</td></tr>'
+                    });
+                    $('#table2').html(res);
+                }
+            })
+        }
+
+        function GetPieDdbS() {
+            var chart = echarts.init(document.getElementById('pie2'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "/get_pie2_ddb",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+
+        function GetTableSwbF() {
+            $.ajax({
+                url: "/get_table1_swb",
+                dataType: 'json',
+                success: function (result) {
+                    var res='<table id="cn_table1" class="cn_table">'+
+                            '<thead><tr>'+
+                            '<th scope="col">lrsj</th>'+
+                            '<th scope="col">jcxx</th>'+
+                            '<th scope="col">lxrxx</th>'+
+                            '<th scope="col">tzfxx</th>'+
+                            '<th scope="col">sbxx</th>'+
+                            '<th scope="col">sbzsxx</th>'+
+                            '<th scope="col">zcfzbxx</th>'+
+                            '<th scope="col">lrbxx</th>'+
+                            '<th scope="col">jydx</th>'+
+                            '<th scope="col">wfwzxx</th>'+
+                            '<th scope="col">bgdjxx</th>'+
+                            '<th scope="col">jcajxx</th>'+
+                            '</tr></thead><tbody>';
+                    $.each(result,function (i,obj) {
+                        res += '<tr>'+
+                               '<td>'+obj[0]+'</td>'+
+                               '<td>'+obj[1]+'</td>'+
+                               '<td>'+obj[2]+'</td>'+
+                               '<td>'+obj[3]+'</td>'+
+                               '<td>'+obj[4]+'</td>'+
+                               '<td>'+obj[5]+'</td>'+
+                               '<td>'+obj[6]+'</td>'+
+                               '<td>'+obj[7]+'</td>'+
+                               '<td>'+obj[8]+'</td>'+
+                               '<td>'+obj[9]+'</td>'+
+                               '<td>'+obj[10]+'</td>'+
+                               '<td>'+obj[11]+'</td>'+
+                               '</tr>'
+                    });
+                    $('#table3').html(res);
+                }
+            })
+        }
+
+        function GetLineSwbF() {
+            var chart = echarts.init(document.getElementById('chart2'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "/get_line1_swb",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+
+
+        function GetChartZzb1() {
+            var chart = echarts.init(document.getElementById('zb_chart1'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "/get_chart1_zbb",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+
+        function GetChartZzb2() {
+            var chart = echarts.init(document.getElementById('zb_chart2'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "/get_chart2_zbb",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+
+        function GetChartZzb3() {
+            var chart = echarts.init(document.getElementById('zb_chart3'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "/get_chart3_zbb",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+
+        function GetChartZzb4() {
+            var chart = echarts.init(document.getElementById('zb_chart4'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "/get_chart4_zbb",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+
+        function GetChartZzb5() {
+            var chart = echarts.init(document.getElementById('zb_chart5'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "/get_chart5_zbb",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+
+        function GetChartZzb6() {
+            var chart = echarts.init(document.getElementById('zb_chart6'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "/get_chart6_zbb",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+
+        function GetChartZzb7() {
+            var chart = echarts.init(document.getElementById('zb_chart7'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "/get_chart7_zbb",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+
+        function GetChartZzb8() {
+            var chart = echarts.init(document.getElementById('zb_chart8'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "/get_chart8_zbb",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+
+        function GetChartZzb9() {
+            var chart = echarts.init(document.getElementById('zb_chart9'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "/get_chart9_zbb",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+
+        function GetChartZzb10() {
+            var chart = echarts.init(document.getElementById('zb_chart10'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "/get_chart10_zbb",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+
+        function GetChartZzb11() {
+            var chart = echarts.init(document.getElementById('zb_chart11'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "/get_chart11_zbb",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+
+        function GetChartZzb12() {
+            var chart = echarts.init(document.getElementById('zb_chart12'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "/get_chart12_zbb",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+
+        function GetChartZzb13() {
+            var chart = echarts.init(document.getElementById('zb_chart13'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "/get_chart13_zbb",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+
+        function GetChartZzb14() {
+            var chart = echarts.init(document.getElementById('zb_chart14'), 'white', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "/get_chart14_zbb",
+                dataType: 'json',
+                success: function (result) {
+                    chart.setOption(result);
+                }
+            });
+        }
+
+    </script>
+
+
+</body>
+</html>
